@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AKRateBar">
+        <attr name="activeImage" format="reference" value="@drawable/gwiazdka_10"/>
+        <attr name="inactiveImage" format="reference" value="@drawable/gwiazdka_0"/>
+        <attr name="rateStarsNumber" format="integer"/>
+        <attr name="imageSize" format="dimension" value="20dp"></attr>
+    </declare-styleable>
+</resources>
