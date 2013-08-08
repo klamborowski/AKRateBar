@@ -2,12 +2,9 @@ package pl.klamborowski.akratebar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.provider.MediaStore.Images.ImageColumns;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,6 +18,11 @@ public class AkRateBar extends LinearLayout {
 	private float imageSize; 
 
 	private int rate = 0;
+	
+	public AkRateBar(Context context){
+		super(context);
+	}
+	
 	public AkRateBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
@@ -79,6 +81,27 @@ public class AkRateBar extends LinearLayout {
 					rate = (selectedId +1);
 					
 				};
+			});
+			
+			tempImageView.setOnTouchListener(new OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					int selectedId = v.getId();
+					
+					LinearLayout ll = (LinearLayout) v.getParent();
+					for (int j = 0; j < rateStarsNumber; j++) {
+						if (j <= selectedId) {
+							((ImageView) ll.findViewById(j))
+									.setImageResource(activeImageResource);
+						} else {
+							((ImageView) ll.findViewById(j))
+									.setImageResource(inactiveImageResource);
+						}
+					}
+					rate = (selectedId +1);
+					return false;
+				}
 			});
 			
 			this.addView(tempImageView);
